@@ -10,6 +10,10 @@ dados.columns = [unidecode(col) for col in dados.columns]
 
 dados = dados.apply(lambda x: unidecode(x) if isinstance(x, str) else x)
 
+# Converter colunas para numérico onde aplicável
+for col in dados.columns:
+    dados[col] = pd.to_numeric(dados[col], errors='coerce')
+
 diretorio_alvo = "tratamento"
 os.makedirs(diretorio_alvo, exist_ok=True)
 
